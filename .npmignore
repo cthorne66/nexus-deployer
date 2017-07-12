@@ -1,0 +1,5 @@
+test/
+.gitignore
+.jshintrc
+.travis.yml
+npm-shrinkwrap.json
