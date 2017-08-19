@@ -1,31 +1,27 @@
-# nexus-deployer
+# web-nexus-deployer
 
-> Nexus Artifact Deployer from grunt
+> Nexus Artifact Deployer from gulp task and Node
 
-[![Build Status](https://travis-ci.org/cthorne66/nexus-deployer.png)](https://travis-ci.org/cthorne66/nexus-deployer) 
-[![npm version](https://badge.fury.io/js/nexus-deployer.svg)](http://badge.fury.io/js/nexus-deployer)
-[![Dependency Status](https://david-dm.org/cthorne66/nexus-deployer.png)](https://david-dm.org/cthorne66/nexus-deployer)
 ## Getting Started
 
 To install
 ```shell
-npm install nexus-deployer --save-dev
+npm install web-nexus-deployer --save-dev
 ```
 
 From there, you have options
 
 1. Run with Node
 2. Run with Gulp
-2. Run with Grunt
 
 ## Running with Node
 
 ```js
-var deployer = require('nexus-deployer');
+var deployer = require('web-nexus-deployer');
 
 var release = {
-    groupId: 'nexus-deployer',
-    artifactId: 'nexus-deployer',
+    groupId: 'web-nexus-deployer',
+    artifactId: 'web-nexus-deployer',
     version: '1.0',
     packaging: 'zip',
     auth: {
@@ -34,7 +30,7 @@ var release = {
     },
     pomDir: 'build/pom',
     url: 'http://localhost:8081/nexus/content/repositories/releases',
-    artifact: 'build/nexus-deployer.zip',
+    artifact: 'build/web-nexus-deployer.zip',
     noproxy: 'localhost',
     cwd: ''
 };
@@ -51,15 +47,15 @@ deployer.deploy(release, function(){
 ## Running with Gulp
 
 ```js
-var deployer = require('nexus-deployer');
+var deployer = require('web-nexus-deployer');
 
 // dont forget to create a task to actually generate the artifact as assumed
 // here with the dependent 'artifacts:generate' task
 gulp.task('deploy:artifacts', ['artifacts:generate'], function(callback) {
   
     var snapshot = {
-        groupId: 'nexus-deployer',
-        artifactId: 'nexus-deployer',
+        groupId: 'web-nexus-deployer',
+        artifactId: 'web-nexus-deployer',
         version: '1.2-SNAPSHOT',
         packaging: 'zip',
         auth: {
@@ -68,7 +64,7 @@ gulp.task('deploy:artifacts', ['artifacts:generate'], function(callback) {
         },
         pomDir: 'build/pom',
         url: 'http://localhost:8081/nexus/content/repositories/snapshots',
-        artifact: 'build/nexus-deployer.zip',
+        artifact: 'build/web-nexus-deployer.zip',
         noproxy: 'localhost',
         cwd: '',
         quiet: false,
@@ -78,50 +74,7 @@ gulp.task('deploy:artifacts', ['artifacts:generate'], function(callback) {
     deployer.deploy(snapshot, callback);
 
 });
-```
 
-
-## Running with Grunt
-This plugin requires Grunt `~0.4.2`
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
-
-
-
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
-
-```js
-grunt.loadNpmTasks('nexus-deployer');
-```
-
-## The "nexusDeployer" task
-
-### Overview
-In your project's Gruntfile, add a section named `nexusDeployer` to the data object passed into `grunt.initConfig()`.
-
-```js
-grunt.initConfig({
-  nexusDeployer: {
-    release: {
-      options: {
-		  groupId: "nexus-deployer",
-		  artifactId: "nexus-deployer",
-		  version: "1.0",
-		  packaging: 'zip',
-                  classifier: 'dev',
-		  auth: {
-			username:'admin',
-			password:'admin123'
-		  },
-		  pomDir: 'build/pom',
-		  url: 'http://localhost:9220/nexus/content/repositories/releases',
-		  artifact: 'build/nexus-deployer.zip',
-		  noproxy: 'localhost',
-		  cwd: ''
-		}
-      }
-    }
-});
 ```
 
 ### Options
@@ -214,65 +167,3 @@ Type: `Boolean`
 Default value: `'false'`
 
 Chatty flag.
-
-### Usage Examples
-Deploy to release repository
-
-```js
-grunt.initConfig({
-  nexusDeployer: {
-    release: {
-      options: {
-		  groupId: "nexus-deployer",
-		  artifactId: "nexus-deployer",
-		  version: "1.0",
-		  packaging: 'zip',
-		  auth: {
-			username:'admin',
-			password:'admin123'
-		  },
-		  pomDir: 'build/pom',
-		  url: 'http://localhost:8081/nexus/content/repositories/releases',
-		  artifact: 'build/nexus-deployer.zip',
-		  noproxy: 'localhost',
-		  cwd: ''
-		}
-      }
-    }
-});
-```
-
-Deploy to snapshots repository
-
-```js
-grunt.initConfig({
-  nexusDeployer: {
-    release: {
-      options: {
-		  groupId: "nexus-deployer",
-		  artifactId: "nexus-deployer",
-		  version: "1.0-SNAPSHOT",
-		  packaging: 'zip',
-		  auth: {
-			username:'admin',
-			password:'admin123'
-		  },
-		  pomDir: 'build/pom',
-		  url: 'http://localhost:8081/nexus/content/repositories/snapshots',
-		  artifact: 'build/nexus-deployer.zip',
-		  noproxy: 'localhost',
-		  cwd: '',
-		  parallel:false,
-		  quiet: true
-		}
-      }
-    }
-});
-```
-
-To run
-```
-grunt nexusDeployer
-```
-
-## Release History
