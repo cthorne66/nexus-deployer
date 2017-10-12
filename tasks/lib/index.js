@@ -124,8 +124,8 @@ var createAndUploadArtifacts = function (options, done) {
 
         var binaryChunk = chunk.toString('binary');
 
-        md5Hash.update(binaryChunk);
-        sha1Hash.update(binaryChunk);
+        md5Hash.update(binaryChunk, 'binary');
+        sha1Hash.update(binaryChunk, 'binary');
     });
 
     artifactStream.on('error', function(error) {
