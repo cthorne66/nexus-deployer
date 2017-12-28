@@ -68,7 +68,7 @@ var createAndUploadArtifacts = function (options, done) {
 
     var upload = function (fileLocation, targetFile) {
         var uploadArtifact = function (cb) {
-            var targetUri = options.url + '/' + targetFile, status;
+            var targetUri = options.url + '/' + targetFile, status = '';
             if (!options.quiet) {
                 console.log(chalk.blue('Uploading to ' + targetUri + "\n\n"));
             }
@@ -105,7 +105,7 @@ var createAndUploadArtifacts = function (options, done) {
                 status = data;
             });
             childProcess.on('close', function (code) {
-                if ((status && status.substring(0, 1) == "2") || code == 0) {
+                if (status.substring(0, 1) === "2" && code === 0) {
                     cb(null, "Ok");
                 } else  {
                     cb("Status code " + status + " for " + targetUri, null);
