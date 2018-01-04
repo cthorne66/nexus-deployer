@@ -75,7 +75,6 @@ var createAndUploadArtifacts = function (options, done) {
 
             var curlOptions = [
                 '--silent',
-                '--output', '/dev/stderr',
                 '--write-out', '"%{http_code}"',
                 '--upload-file', fileLocation,
                 '--noproxy', options.noproxy ? options.noproxy : '127.0.0.1',
@@ -108,7 +107,7 @@ var createAndUploadArtifacts = function (options, done) {
                 if (status.substring(0, 1) === "2" && code === 0) {
                     cb(null, "Ok");
                 } else  {
-                    cb("Status code " + status + " for " + targetUri, null);
+                    cb("Status code " + status + " and exit code " + code + " for " + targetUri, null);
                 }
             });
         };
